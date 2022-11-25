@@ -63,10 +63,10 @@ namespace csv_összefésülés
         }
         public csvfésü()
         {
-            csv1 = "C:\\csv\\lista1.csv";
-            csv2 = "C:\\csv\\lista2.csv";
+            csv1 = "C:\\csv\\procurement list.csv";
+            csv2 = "C:\\csv\\procurement list (1).csv";
             StreamReader streamReader1 = new StreamReader(csv1, Encoding.UTF8);
-            StreamReader streamReader2 = new StreamReader(csv2);
+            StreamReader streamReader2 = new StreamReader(csv2, Encoding.UTF8);
             List<termék> elso = new List<termék>();
             List<termék> masodik = new List<termék>();
             string headerLine = streamReader2.ReadLine();
@@ -81,12 +81,12 @@ namespace csv_összefésülés
                 elso.Add(row1);
                 masodik.Add(row2);
             }
-
-
             streamReader1.Close();
             streamReader2.Close();
+
             List<termék> össze = new List<termék>();
             bool lefutott = false;
+
             for (int i = 0; i < elso.Count; i++)
             {
                 lefutott = false;
@@ -111,13 +111,8 @@ namespace csv_összefésülés
                 }
             }
             össze.AddRange(masodik);
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                NewLine = Environment.NewLine,
 
-            };
-            
-            using (var writer = new StreamWriter("C:\\csv\\összegzett.csv"))
+            using (var writer = new StreamWriter("C:\\csv\\összegzett.csv",false, Encoding.UTF8))
             using (var csv = new CsvWriter(writer, CultureInfo.CurrentCulture))
             {
                 csv.NextRecord();
@@ -128,11 +123,6 @@ namespace csv_összefésülés
                 }
                 writer.Flush();
             }
-        }
-        
-        internal class csv
-        {
-
         }
     }
 }
