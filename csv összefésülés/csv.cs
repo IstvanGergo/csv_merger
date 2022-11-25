@@ -1,0 +1,138 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using CsvHelper;
+using CsvHelper.Configuration;
+
+namespace csv_összefésülés
+{
+    
+
+
+    public class csvfésü
+    {
+        public string csv1;
+        public string csv2;
+        public struct termék
+        {
+            public string cikkszám { get; set; }
+            public string név { get; set; }
+            public int darab { get; set; }
+            public int nettó { get; set; }
+            public int bruttó { get; set; }
+            public string gyártó { get; set; }
+            public string az { get; set; }
+        }
+        public termék beolvas(string s)
+        {
+            
+            string[] darab = s.Split(";");
+            for (int i = 0; i < darab.Length; i++)
+            {
+                darab[i] = Regex.Replace(darab[i], "\"", String.Empty);
+            }
+            termék olvas = new termék();
+            olvas.cikkszám = darab[0];
+            olvas.név = darab[1];
+            olvas.darab = int.Parse(darab[2]);
+            olvas.nettó = int.Parse(darab[3]);
+            olvas.bruttó = int.Parse(darab[4]);
+            olvas.gyártó = darab[5];
+            olvas.az = darab[6];
+            return olvas;
+
+        }
+        public class termékMap : ClassMap<termék>
+        {
+            public termékMap()
+            {
+                Map(m => m.cikkszám).Index(0).Name("Cikkszám");
+                Map(m => m.név).Index(1).Name("Név");
+                Map(m => m.darab).Index(2).Name("Darabszám");
+                Map(m => m.nettó).Index(3).Name("Nettó");
+                Map(m => m.bruttó).Index(4).Name("Bruttó");
+                Map(m => m.gyártó).Index(5).Name("Gyártó");
+                Map(m => m.az).Index(6).Name("Rendelés azonosító(k)");
+            }
+        }
+        public csvfésü()
+        {
+            csv1 = "C:\\csv\\lista1.csv";
+            csv2 = "C:\\csv\\lista2.csv";
+            StreamReader streamReader1 = new StreamReader(csv1, Encoding.UTF8);
+            StreamReader streamReader2 = new StreamReader(csv2);
+            List<termék> elso = new List<termék>();
+            List<termék> masodik = new List<termék>();
+            string headerLine = streamReader2.ReadLine();
+            headerLine = streamReader1.ReadLine();
+            /*CSV beolvasása listába*/
+            while (!streamReader1.EndOfStream && !streamReader2.EndOfStream)
+            {
+                string s1 = streamReader1.ReadLine();
+                termék row1 = beolvas(s1);
+                string s2 = streamReader2.ReadLine();
+                termék row2 = beolvas(s2);
+                elso.Add(row1);
+                masodik.Add(row2);
+            }
+
+
+            streamReader1.Close();
+            streamReader2.Close();
+            List<termék> össze = new List<termék>();
+            bool lefutott = false;
+            for (int i = 0; i < elso.Count; i++)
+            {
+                lefutott = false;
+                for (int j = 0; j < masodik.Count; j++)
+                {
+                    if (elso[i].cikkszám == masodik[j].cikkszám)
+                    {
+                        termék jelen = new termék();
+                        jelen = elso[i];
+                        jelen.darab += masodik[j].darab;
+                        jelen.az += $", {masodik[j].az}";
+                        össze.Add(jelen);
+                        j++;
+                        lefutott = true;
+                        masodik.RemoveAt(j);
+                    }
+
+                }
+                if (lefutott == false)
+                {
+                    össze.Add(elso[i]);
+                }
+            }
+            össze.AddRange(masodik);
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                NewLine = Environment.NewLine,
+
+            };
+            
+            using (var writer = new StreamWriter("C:\\csv\\összegzett.csv"))
+            using (var csv = new CsvWriter(writer, CultureInfo.CurrentCulture))
+            {
+                csv.NextRecord();
+                foreach (var record in össze)
+                {
+                    csv.WriteRecord(record);
+                    csv.NextRecord();
+                }
+                writer.Flush();
+            }
+        }
+        
+        internal class csv
+        {
+
+        }
+    }
+}
