@@ -3,18 +3,39 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csv összefésülés", "csv összefésülés\csv összefésülés.csproj", "{9E99FB02-B105-46AF-8404-597783C02257}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csv összefésülés", "csv összefésülés\csv összefésülés.csproj", "{9E99FB02-B105-46AF-8404-597783C02257}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CSV Merger", "Setup\Setup.vdproj", "{E5F65CBC-F501-4BCB-8593-4D46072DEC42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Test|Any CPU = Test|Any CPU
+		Test|x64 = Test|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9E99FB02-B105-46AF-8404-597783C02257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E99FB02-B105-46AF-8404-597783C02257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E99FB02-B105-46AF-8404-597783C02257}.Debug|x64.ActiveCfg = Debug|x64
+		{9E99FB02-B105-46AF-8404-597783C02257}.Debug|x64.Build.0 = Debug|x64
 		{9E99FB02-B105-46AF-8404-597783C02257}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E99FB02-B105-46AF-8404-597783C02257}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E99FB02-B105-46AF-8404-597783C02257}.Release|x64.ActiveCfg = Debug|x64
+		{9E99FB02-B105-46AF-8404-597783C02257}.Release|x64.Build.0 = Debug|x64
+		{9E99FB02-B105-46AF-8404-597783C02257}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{9E99FB02-B105-46AF-8404-597783C02257}.Test|Any CPU.Build.0 = Test|Any CPU
+		{9E99FB02-B105-46AF-8404-597783C02257}.Test|x64.ActiveCfg = Release|Any CPU
+		{9E99FB02-B105-46AF-8404-597783C02257}.Test|x64.Build.0 = Release|Any CPU
+		{E5F65CBC-F501-4BCB-8593-4D46072DEC42}.Debug|Any CPU.ActiveCfg = Debug
+		{E5F65CBC-F501-4BCB-8593-4D46072DEC42}.Debug|x64.ActiveCfg = Debug
+		{E5F65CBC-F501-4BCB-8593-4D46072DEC42}.Release|Any CPU.ActiveCfg = Release
+		{E5F65CBC-F501-4BCB-8593-4D46072DEC42}.Release|x64.ActiveCfg = Release
+		{E5F65CBC-F501-4BCB-8593-4D46072DEC42}.Release|x64.Build.0 = Release
+		{E5F65CBC-F501-4BCB-8593-4D46072DEC42}.Test|Any CPU.ActiveCfg = Debug
+		{E5F65CBC-F501-4BCB-8593-4D46072DEC42}.Test|x64.ActiveCfg = Debug
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

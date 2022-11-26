@@ -82,8 +82,8 @@ namespace csv_összefésülés
                 Console.WriteLine("Add meg az első lista pontos helyét!\nPl.:C:\\\\dokumentumok\\\\procurement list.csv");
                 csv2 = Console.ReadLine()!;
             }
-            StreamReader streamReader1 = new StreamReader(csv1, Encoding.UTF8);
-            StreamReader streamReader2 = new StreamReader(csv2, Encoding.UTF8);
+            StreamReader streamReader1 = new StreamReader(csv1, Encoding.Latin1);
+            StreamReader streamReader2 = new StreamReader(csv2, Encoding.Latin1);
             List<termék> elso = new List<termék>();
             List<termék> masodik = new List<termék>();
             string? headerLine = streamReader2.ReadLine();
@@ -132,7 +132,7 @@ namespace csv_összefésülés
             }
             össze.AddRange(masodik);
 
-            using (var writer = new StreamWriter("C:\\csv\\összegzett.csv", false, Encoding.UTF8))
+            using (var writer = new StreamWriter("C:\\csv\\összegzett.csv", false, Encoding.Latin1))
             using (var csv = new CsvWriter(writer, CultureInfo.CurrentCulture))
             {
                 csv.NextRecord();
