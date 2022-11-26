@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CsvHelper;
 using CsvHelper.Configuration;
+using CsvHelper.Configuration.Attributes;
+using Microsoft.VisualBasic.FileIO;
+using static System.Net.WebRequestMethods;
 
 namespace csv_összefésülés
 {
@@ -37,14 +41,17 @@ namespace csv_összefésülés
             {
                 darab[i] = Regex.Replace(darab[i], "\"", String.Empty);
             }
-            termék olvas = new termék();
-            olvas.cikkszám = darab[0];
-            olvas.név = darab[1];
-            olvas.darab = int.Parse(darab[2]);
-            olvas.nettó = int.Parse(darab[3]);
-            olvas.bruttó = int.Parse(darab[4]);
-            olvas.gyártó = darab[5];
-            olvas.az = darab[6];
+            termék olvas = new()
+            {
+                cikkszám = darab[0],
+                név = darab[1],
+                darab = int.Parse(darab[2]),
+                nettó = int.Parse(darab[3]),
+                bruttó = int.Parse(darab[4]),
+                gyártó = darab[5],
+                az = darab[6]
+            };
+            
             return olvas;
 
         }
@@ -61,6 +68,7 @@ namespace csv_összefésülés
                 Map(m => m.az).Index(6).Name("Rendelés azonosító(k)");
             }
         }
+        
         public csvfésü()
         {
             csv1 = "C:\\csv\\procurement list.csv";
@@ -69,15 +77,15 @@ namespace csv_összefésülés
             StreamReader streamReader2 = new StreamReader(csv2, Encoding.UTF8);
             List<termék> elso = new List<termék>();
             List<termék> masodik = new List<termék>();
-            string headerLine = streamReader2.ReadLine();
-            headerLine = streamReader1.ReadLine();
+            string? headerLine = streamReader2.ReadLine();
+            streamReader1.ReadLine();
             /*CSV beolvasása listába*/
             while (!streamReader1.EndOfStream && !streamReader2.EndOfStream)
             {
-                string s1 = streamReader1.ReadLine();
-                termék row1 = beolvas(s1);
-                string s2 = streamReader2.ReadLine();
-                termék row2 = beolvas(s2);
+                string? s1 = streamReader1.ReadLine();
+                termék row1 = beolvas(s1!);
+                string? s2 = streamReader2.ReadLine();
+                termék row2 = beolvas(s2!);
                 elso.Add(row1);
                 masodik.Add(row2);
             }
@@ -112,7 +120,7 @@ namespace csv_összefésülés
             }
             össze.AddRange(masodik);
 
-            using (var writer = new StreamWriter("C:\\csv\\összegzett.csv",false, Encoding.UTF8))
+            using (var writer = new StreamWriter("C:\\csv\\összegzett.csv", false, Encoding.UTF8))
             using (var csv = new CsvWriter(writer, CultureInfo.CurrentCulture))
             {
                 csv.NextRecord();
