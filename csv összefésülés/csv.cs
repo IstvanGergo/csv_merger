@@ -73,7 +73,7 @@ namespace csv_összefésülés
             csv1 = "C:\\csv\\procurement list.csv";
             while (!System.IO.File.Exists(csv1))
             {
-                Console.WriteLine("Add meg az első lista pontos helyét!\nPl.:C:\\dokumentumok\\procurement list.csv");
+                Console.WriteLine("Add meg az első lista pontos helyét!\nPl.:C:\\\\dokumentumok\\\\procurement list.csv");
                 csv1 = Console.ReadLine()!;
             }
             csv2 = "C:\\csv\\procurement list (1).csv";
@@ -82,10 +82,10 @@ namespace csv_összefésülés
                 Console.WriteLine("Add meg az első lista pontos helyét!\nPl.:C:\\\\dokumentumok\\\\procurement list.csv");
                 csv2 = Console.ReadLine()!;
             }
-            StreamReader streamReader1 = new StreamReader(csv1, Encoding.Latin1);
-            StreamReader streamReader2 = new StreamReader(csv2, Encoding.Latin1);
-            List<termék> elso = new List<termék>();
-            List<termék> masodik = new List<termék>();
+            StreamReader streamReader1 = new (csv1, Encoding.Latin1);
+            StreamReader streamReader2 = new (csv2, Encoding.Latin1);
+            List<termék> elso = new ();
+            List<termék> masodik = new ();
             string? headerLine = streamReader2.ReadLine();
             streamReader1.ReadLine();
             /*CSV beolvasása listába*/
@@ -104,7 +104,7 @@ namespace csv_összefésülés
             }
             streamReader2.Close();
 
-            List<termék> össze = new List<termék>();
+            List<termék> össze = new ();
             bool lefutott = false;
 
             for (int i = 0; i < elso.Count; i++)
@@ -114,7 +114,7 @@ namespace csv_összefésülés
                 {
                     if (elso[i].cikkszám == masodik[j].cikkszám)
                     {
-                        termék jelen = new termék();
+                        termék jelen = new();
                         jelen = elso[i];
                         jelen.darab += masodik[j].darab;
                         jelen.az += $", {masodik[j].az}";

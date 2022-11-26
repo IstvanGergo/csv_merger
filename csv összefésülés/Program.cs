@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
 
-            csvfésü asd = new csvfésü();
+            csvfésü asd = new();
 
         }
     }

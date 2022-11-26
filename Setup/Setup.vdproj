@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_98F1AA1EDE53474EBB1C0B117558561A"
+        "MsmKey" = "8:_99C6D1739677476B8045C16787A545A2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -90,7 +90,7 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_98F1AA1EDE53474EBB1C0B117558561A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_99C6D1739677476B8045C16787A545A2"
             {
             "SourcePath" = "8:..\\..\\..\\..\\Downloads\\page_paper_file_document_text_icon_228122 (1).ico"
             "TargetName" = "8:page_paper_file_document_text_icon_228122 (1).ico"
@@ -167,7 +167,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup"
         "ProductCode" = "8:{0F329298-EC80-4682-A58D-C0CFBD54575C}"
-        "PackageCode" = "8:{672BD75E-A5E8-4BE0-B7A1-AB3C5F281571}"
+        "PackageCode" = "8:{17EDE7B5-E8DC-4F09-872A-435153C9F4B1}"
         "UpgradeCode" = "8:{8823152E-C8E8-470E-890C-99F0F921FB31}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -298,7 +298,7 @@
             "Target" = "8:_717CA4C9E6E2474ABEC62ED9CE3AD8CF"
             "Folder" = "8:_497AD00C42324F21AEF59DC61CF0DFF6"
             "WorkingFolder" = "8:_5B763DBC82DA4991AA3395B2D9F6F273"
-            "Icon" = "8:_98F1AA1EDE53474EBB1C0B117558561A"
+            "Icon" = "8:_99C6D1739677476B8045C16787A545A2"
             "Feature" = "8:"
             }
         }
