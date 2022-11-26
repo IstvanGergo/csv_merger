@@ -25,6 +25,18 @@
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_C0C6CE9343DA42978EEA4B839E929C69"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D22EFA9D9EDE4FE3BA51F1CBCA141FC2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -95,7 +107,47 @@
             "SourcePath" = "8:..\\..\\..\\..\\Downloads\\page_paper_file_document_text_icon_228122 (1).ico"
             "TargetName" = "8:page_paper_file_document_text_icon_228122 (1).ico"
             "Tag" = "8:"
-            "Folder" = "8:_5B763DBC82DA4991AA3395B2D9F6F273"
+            "Folder" = "8:_F9DCCE367712488BB2E75BBBC7FD2FA2"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C0C6CE9343DA42978EEA4B839E929C69"
+            {
+            "SourcePath" = "8:C:\\jó\\csv\\procurement list (1).csv"
+            "TargetName" = "8:procurement list (1).csv"
+            "Tag" = "8:"
+            "Folder" = "8:_58FC7889C5174240970839ED9048A703"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D22EFA9D9EDE4FE3BA51F1CBCA141FC2"
+            {
+            "SourcePath" = "8:C:\\jó\\csv\\procurement list.csv"
+            "TargetName" = "8:procurement list.csv"
+            "Tag" = "8:"
+            "Folder" = "8:_58FC7889C5174240970839ED9048A703"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -129,7 +181,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_5B763DBC82DA4991AA3395B2D9F6F273"
             {
-            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:C:\\"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -137,6 +189,28 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_58FC7889C5174240970839ED9048A703"
+                    {
+                    "Name" = "8:csv"
+                    "AlwaysCreate" = "11:TRUE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_604D46B5E3A44C8996FF059CCEF024CE"
+                        "Folders"
+                        {
+                        }
+                    }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_F9DCCE367712488BB2E75BBBC7FD2FA2"
+                    {
+                    "Name" = "8:CSV Merger"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_D037538184AB4070B7B511368D0DA54C"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_9FD90D3826EC41FEA08AA0A633C82610"
@@ -167,7 +241,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup"
         "ProductCode" = "8:{0F329298-EC80-4682-A58D-C0CFBD54575C}"
-        "PackageCode" = "8:{17EDE7B5-E8DC-4F09-872A-435153C9F4B1}"
+        "PackageCode" = "8:{ECDBA92E-2BAC-4F1B-B57E-2B9CCF7F0F83}"
         "UpgradeCode" = "8:{8823152E-C8E8-470E-890C-99F0F921FB31}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -705,7 +779,7 @@
             "SourcePath" = "8:..\\csv összefésülés\\obj\\x64\\Debug\\net6.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_5B763DBC82DA4991AA3395B2D9F6F273"
+            "Folder" = "8:_F9DCCE367712488BB2E75BBBC7FD2FA2"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
