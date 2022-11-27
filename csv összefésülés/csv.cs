@@ -20,8 +20,8 @@ namespace csv_összefésülés
 
     public class csvfésü
     {
-        public string csv1;
-        public string csv2;
+        public string csv1 = "C:\\csv\\procurement list.csv";
+        public string csv2 = "C:\\csv\\procurement list (1).csv";
         public struct termék
         {
             public string cikkszám { get; set; }
@@ -32,28 +32,7 @@ namespace csv_összefésülés
             public string gyártó { get; set; }
             public string az { get; set; }
         }
-        public termék beolvas(string s)
-        {
-            
-            string[] darab = s.Split(";");
-            for (int i = 0; i < darab.Length; i++)
-            {
-                darab[i] = Regex.Replace(darab[i], "\"", String.Empty);
-            }
-            termék olvas = new()
-            {
-                cikkszám = darab[0],
-                név = darab[1],
-                darab = int.Parse(darab[2]),
-                nettó = int.Parse(darab[3]),
-                bruttó = int.Parse(darab[4]),
-                gyártó = darab[5],
-                az = darab[6]
-            };
-            
-            return olvas;
-
-        }
+        
         public class termékMap : ClassMap<termék>
         {
             public termékMap()
@@ -67,43 +46,52 @@ namespace csv_összefésülés
                 Map(m => m.az).Index(6).Name("Rendelés azonosító(k)");
             }
         }
-
+        public List<termék> beolvas(string csv)
+        {
+            List<termék> lista = new();
+            StreamReader streamReader = new(csv, Encoding.Latin1);
+            string? headerLine = streamReader.ReadLine();
+            while (!streamReader.EndOfStream)
+            {
+                string? s1 = streamReader.ReadLine();
+                string[] darab = s1.Split(";");
+                for (int i = 0; i < darab.Length; i++)
+                {
+                    darab[i] = Regex.Replace(darab[i], "\"", String.Empty);
+                }
+                termék olvas = new()
+                {
+                    cikkszám = darab[0],
+                    név = darab[1],
+                    darab = int.Parse(darab[2]),
+                    nettó = int.Parse(darab[3]),
+                    bruttó = int.Parse(darab[4]),
+                    gyártó = darab[5],
+                    az = darab[6]
+                };
+                lista.Add(olvas);
+            }
+            streamReader.Close();
+            return lista;
+        }
         public csvfésü()
         {
-            csv1 = "C:\\csv\\procurement list.csv";
+            /*Fájlellenörzés, létezik-e a megadott helyen, megadott nevű fájl*/
             while (!System.IO.File.Exists(csv1))
             {
-                Console.WriteLine("Add meg az első lista pontos helyét!\nPl.:C:\\\\dokumentumok\\\\procurement list.csv");
+                Console.WriteLine("Az első fájl helye, vagy neve nem megfelelő!\n" +
+                    "Pontos hely megadása:\nPl.:C:\\\\csv\\\\procurement list.csv");
                 csv1 = Console.ReadLine()!;
             }
-            csv2 = "C:\\csv\\procurement list (1).csv";
             while (!System.IO.File.Exists(csv2))
             {
-                Console.WriteLine("Add meg az első lista pontos helyét!\nPl.:C:\\\\dokumentumok\\\\procurement list.csv");
+                Console.WriteLine("A második fájl helye, vagy neve nem megfelelő!\n" +
+                    "Pontos hely megadása:\nPl.:C:\\\\csv\\\\procurement list.csv");
                 csv2 = Console.ReadLine()!;
             }
-            StreamReader streamReader1 = new (csv1, Encoding.Latin1);
-            StreamReader streamReader2 = new (csv2, Encoding.Latin1);
-            List<termék> elso = new ();
-            List<termék> masodik = new ();
-            string? headerLine = streamReader2.ReadLine();
-            streamReader1.ReadLine();
             /*CSV beolvasása listába*/
-            while (!streamReader1.EndOfStream)
-            {
-                string? s1 = streamReader1.ReadLine();
-                termék row1 = beolvas(s1!);
-                elso.Add(row1);
-            }
-            streamReader1.Close();
-            while (!streamReader2.EndOfStream)
-            {
-                string? s2 = streamReader2.ReadLine();
-                termék row2 = beolvas(s2!);
-                masodik.Add(row2);
-            }
-            streamReader2.Close();
-
+            List<termék> elso = beolvas(csv1);
+            List<termék> masodik = beolvas(csv2);
             List<termék> össze = new ();
             bool lefutott = false;
 
@@ -123,7 +111,6 @@ namespace csv_összefésülés
                         j++;
                         lefutott = true;
                     }
-
                 }
                 if (lefutott == false)
                 {
