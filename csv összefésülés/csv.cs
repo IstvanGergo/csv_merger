@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.ExceptionServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -20,8 +21,8 @@ namespace csv_összefésülés
 
     public class csvfésü
     {
-        public string csv1 = "C:\\csv\\procurement list.csv";
-        public string csv2 = "C:\\csv\\procurement list (1).csv";
+        public string csv1 = "C:\\csv\\procurement_list.csv";
+        public string csv2 = "C:\\csv\\procurement_list (1).csv";
         public struct termék
         {
             public string cikkszám { get; set; }
@@ -74,6 +75,18 @@ namespace csv_összefésülés
             streamReader.Close();
             return lista;
         }
+        public string rendezettAz(string az)
+        {
+            var darab = az.Split(",");
+            Array.Sort(darab);
+            az = $"{darab[0]}, ";
+            for (int i = 0; i < darab.Length - 2; i++)
+            {
+                az += $"{darab[i + 1]}, ";
+            }
+            az += $"{darab[darab.Length - 1]}";
+            return az;
+        }
         public csvfésü()
         {
             /*Fájlellenörzés, létezik-e a megadott helyen, megadott nevű fájl*/
@@ -106,6 +119,7 @@ namespace csv_összefésülés
                         jelen = elso[i];
                         jelen.darab += masodik[j].darab;
                         jelen.az += $", {masodik[j].az}";
+                        jelen.az = rendezettAz(jelen.az);
                         össze.Add(jelen);
                         masodik.RemoveAt(j);
                         j++;
@@ -117,13 +131,15 @@ namespace csv_összefésülés
                     össze.Add(elso[i]);
                 }
             }
+            
             össze.AddRange(masodik);
+            List<termék> sorted = össze.OrderBy(t => t.az.Substring(0,6)).ToList();
 
             using (var writer = new StreamWriter("C:\\csv\\összegzett.csv", false, Encoding.Latin1))
             using (var csv = new CsvWriter(writer, CultureInfo.CurrentCulture))
             {
                 csv.NextRecord();
-                foreach (var record in össze)
+                foreach (var record in sorted)
                 {
                     csv.WriteRecord(record);
                     csv.NextRecord();
