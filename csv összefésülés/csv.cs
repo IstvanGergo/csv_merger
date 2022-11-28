@@ -77,7 +77,7 @@ namespace csv_összefésülés
         }
         public string rendezettAz(string az)
         {
-            var darab = az.Split(",");
+            var darab = az.Split(", ");
             Array.Sort(darab);
             az = $"{darab[0]}, ";
             for (int i = 0; i < darab.Length - 2; i++)
@@ -133,7 +133,7 @@ namespace csv_összefésülés
             }
             
             össze.AddRange(masodik);
-            List<termék> sorted = össze.OrderBy(t => t.az.Substring(0,6)).ToList();
+            List<termék> sorted = össze.OrderBy(t => t.az.Substring(0,7)).ToList();
 
             using (var writer = new StreamWriter("C:\\csv\\összegzett.csv", false, Encoding.Latin1))
             using (var csv = new CsvWriter(writer, CultureInfo.CurrentCulture))
@@ -149,3 +149,4 @@ namespace csv_összefésülés
         }
     }
 }
+
