@@ -128,12 +128,15 @@ namespace csv_összefésülés
                 }
                 if (lefutott == false)
                 {
-                    össze.Add(elso[i]);
+                    termék jelen = new();
+                    jelen = elso[i];
+                    jelen.az = rendezettAz(jelen.az);
+                    össze.Add(jelen);
                 }
             }
             
             össze.AddRange(masodik);
-            List<termék> sorted = össze.OrderBy(t => t.az.Substring(0,7)).ToList();
+            List<termék> sorted = össze.OrderBy(t => t.az.Substring(0,6)).ToList();
 
             using (var writer = new StreamWriter("C:\\csv\\összegzett.csv", false, Encoding.Latin1))
             using (var csv = new CsvWriter(writer, CultureInfo.CurrentCulture))
