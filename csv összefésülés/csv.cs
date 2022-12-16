@@ -21,8 +21,7 @@ namespace csv_összefésülés
 
     public class csvfésü
     {
-        public string csv1 = "C:\\csv\\procurement_list.csv";
-        public string csv2 = "C:\\csv\\procurement_list (1).csv";
+        
         public struct termék
         {
             public string cikkszám { get; set; }
@@ -87,26 +86,14 @@ namespace csv_összefésülés
             az += $"{darab[darab.Length - 1]}";
             return az;
         }
-        public csvfésü()
+        public csvfésü(string csv1, string csv2)
         {
-            /*Fájlellenörzés, létezik-e a megadott helyen, megadott nevű fájl*/
-            while (!System.IO.File.Exists(csv1))
-            {
-                Console.WriteLine("Az első fájl helye, vagy neve nem megfelelő!\n" +
-                    "Pontos hely megadása:\nPl.:C:\\\\csv\\\\procurement list.csv");
-                csv1 = Console.ReadLine()!;
-            }
-            while (!System.IO.File.Exists(csv2))
-            {
-                Console.WriteLine("A második fájl helye, vagy neve nem megfelelő!\n" +
-                    "Pontos hely megadása:\nPl.:C:\\\\csv\\\\procurement list.csv");
-                csv2 = Console.ReadLine()!;
-            }
+            
             /*CSV beolvasása listába*/
             List<termék> elso = beolvas(csv1);
             List<termék> masodik = beolvas(csv2);
             List<termék> össze = new ();
-            bool lefutott = false;
+            bool lefutott;
 
             for (int i = 0; i < elso.Count; i++)
             {
@@ -130,12 +117,11 @@ namespace csv_összefésülés
                 {
                     termék jelen = new();
                     jelen = elso[i];
-                    jelen.az = rendezettAz(jelen.az);
                     össze.Add(jelen);
                 }
             }
-            
             össze.AddRange(masodik);
+
             List<termék> sorted = össze.OrderBy(t => t.az.Substring(0,6)).ToList();
 
             using (var writer = new StreamWriter("C:\\csv\\összegzett.csv", false, Encoding.Latin1))
